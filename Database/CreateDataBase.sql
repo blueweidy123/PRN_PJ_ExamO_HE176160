@@ -1,12 +1,19 @@
+USE master;
+GO
+DROP DATABASE IF EXISTS OnlineExam;
+GO
+
 -- Create the database
 CREATE DATABASE OnlineExam;
+GO
 
 -- Use the database
 USE OnlineExam;
+GO
 
 -- Create the Users table
 CREATE TABLE Users (
-    UserID INT PRIMARY KEY,
+    UserID INT IDENTITY(1,1) PRIMARY KEY,
     Name VARCHAR(50),
     Email VARCHAR(100),
     Password VARCHAR(100)
@@ -14,7 +21,7 @@ CREATE TABLE Users (
 
 -- Create the Exams table
 CREATE TABLE Exams (
-    ExamID INT PRIMARY KEY,
+    ExamID VARCHAR(50) PRIMARY KEY,
     Title VARCHAR(100),
     Description VARCHAR(500),
     StartTime DATETIME,
@@ -23,16 +30,16 @@ CREATE TABLE Exams (
 
 -- Create the Questions table
 CREATE TABLE Questions (
-    QuestionID INT PRIMARY KEY,
-    ExamID INT,
+    QuestionID VARCHAR(50) PRIMARY KEY,
+    ExamID VARCHAR(50),
     QuestionText VARCHAR(500),
     FOREIGN KEY (ExamID) REFERENCES Exams(ExamID)
 );
 
 -- Create the Options table
 CREATE TABLE Options (
-    OptionID INT PRIMARY KEY,
-    QuestionID INT,
+    OptionID INT IDENTITY(1,1) PRIMARY KEY,
+    QuestionID VARCHAR(50),
     OptionText VARCHAR(200),
     IsCorrectOption BIT,
     FOREIGN KEY (QuestionID) REFERENCES Questions(QuestionID)
@@ -40,10 +47,10 @@ CREATE TABLE Options (
 
 -- Create the UserAnswers table
 CREATE TABLE UserAnswers (
-    UserAnswerID INT PRIMARY KEY,
+    UserAnswerID INT IDENTITY(1,1) PRIMARY KEY,
     UserID INT,
-    ExamID INT,
-    QuestionID INT,
+    ExamID VARCHAR(50),
+    QuestionID VARCHAR(50),
     SelectedOptionID INT,
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (ExamID) REFERENCES Exams(ExamID),
@@ -53,9 +60,9 @@ CREATE TABLE UserAnswers (
 
 -- Create the Results table
 CREATE TABLE Results (
-    ResultID INT PRIMARY KEY,
+    ResultID INT IDENTITY(1,1) PRIMARY KEY,
     UserID INT,
-    ExamID INT,
+    ExamID VARCHAR(50),
     Marks INT,
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (ExamID) REFERENCES Exams(ExamID)

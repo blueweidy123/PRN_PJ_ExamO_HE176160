@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\prn-su23\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160.csproj": {}
+    "E:\\prn_su23\\PRNPJ_ExamO\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160.csproj": {}
   },
   "projects": {
-    "E:\\prn-su23\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160.csproj": {
+    "E:\\prn_su23\\PRNPJ_ExamO\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\prn-su23\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160.csproj",
+        "projectUniqueName": "E:\\prn_su23\\PRNPJ_ExamO\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160.csproj",
         "projectName": "PRN_ExamO_HE176160",
-        "projectPath": "E:\\prn-su23\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160.csproj",
+        "projectPath": "E:\\prn_su23\\PRNPJ_ExamO\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160.csproj",
         "packagesPath": "C:\\Users\\anlal\\.nuget\\packages\\",
-        "outputPath": "E:\\prn-su23\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160\\obj\\",
+        "outputPath": "E:\\prn_su23\\PRNPJ_ExamO\\PRN_ExamO_HE176160\\PRN_ExamO_HE176160\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
