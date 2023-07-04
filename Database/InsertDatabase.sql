@@ -45,8 +45,14 @@ INSERT INTO Exams (ExamID, Title, Description, StartTime, EndTime)
 VALUES
     ('ENG01', 'ENG01', 'English Exam 1', '2023-07-01 09:00:00', '2023-07-01 10:30:00'),
     ('ENG02', 'ENG02', 'EN2', '2023-07-02 14:00:00', NULL),
-	('E1', 'Math Exam', 'A math exam covering various topics', '2023-07-01 09:00:00', '2023-07-01 10:30:00'),
-    ('E2', 'Science Exam', 'A science exam on biology, chemistry, and physics', '2023-07-02 14:00:00', '2023-07-02 15:30:00');
+	('ETEST1', 'ETEST1', 'A math exam covering various topics', '2023-07-01 09:00:00', '2023-07-01 10:30:00'),
+    ('ETEST2', 'ETEST2', 'A science exam on biology, chemistry, and physics', '2023-07-02 14:00:00', '2023-07-02 15:30:00'),
+	('PRN221', 'PRN221', 'Basic Cross-Platform Application Programming With .NET', '2023-07-01 09:00:00', '2023-07-01 10:30:00'),
+    ('SWP391', 'SWP391', 'Application development project', '2023-07-02 14:00:00', '2023-07-02 15:30:00'),
+	('ETEST3', 'ETEST3', 'Insert to test Search Function', '2023-07-01 09:00:00', '2023-07-01 10:30:00'),
+    ('ETEST4', 'ETEST4', 'Insert to test Sort Function, chemistry, and physics', '2023-07-02 14:00:00', '2023-07-02 15:30:00'),
+	('ETEST5', 'ETEST5', 'A good name, some text hellooo', '2023-07-01 09:00:00', '2023-07-01 10:30:00'),
+    ('ETEST6', 'ETEST6', 'Some Weird Text to test', '2023-07-02 14:00:00', '2023-07-02 15:30:00');
 
 	
 
@@ -57,7 +63,7 @@ VALUES
 
 	/*
 	SELECT * FROM Questions ORDER BY QuestionID ASC
-	DELETE FROM Questions WHERE ExamID LIKE 'PRN221';
+	DELETE FROM Questions WHERE ExamID LIKE 'ENG01';
 	*/
 
 	-- English Exam 1
@@ -90,7 +96,7 @@ VALUES
 
 
 	/*
-	SELECT * FROM Questions ORDER BY QuestionID ASC
+	SELECT * FROM Options
 	DELETE FROM Options WHERE QuestionID LIKE 'PRN221';
 	*/
 INSERT INTO Options (QuestionID, OptionText, IsCorrectOption)

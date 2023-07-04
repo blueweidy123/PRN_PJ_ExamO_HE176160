@@ -39,7 +39,7 @@
         align-items: center;
         background-color: #ffffff;
         border-radius: 1rem;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
         font-size: 3rem;
     }
 
@@ -54,7 +54,7 @@
     .Exam-card {
         background-color: #ffffff;
         border-radius: 1rem;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
         padding: 1rem;
         display: flex;
         flex-direction: column;
@@ -101,7 +101,7 @@
     <section class="Exams-Container">
         @foreach (Exam e in Model)
         {
-            <div class="Exam-card" onclick="window.location.href = '/exam/@e.Title'">
+            <div class="Exam-card" onclick="window.location.href = '/exam/@e.ExamId'">
                 <span>@e.Title</span>
                 <span>@e.Description</span>
             </div>

@@ -1,4 +1,7 @@
-﻿@*
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using PRN_ExamO_HE176160.Models
+@model Tuple<List<Question>, List<Option>>
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -26,7 +29,100 @@
         transition: .3s all ease;
     }
 
-  
+    .index-header {
+        min-height: 200px;
+        margin: 2rem;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        border-radius: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        font-size: 3rem;
+    }
+
+    .takeQuizz-content {
+        margin: 2rem;
+        padding: 2rem;
+        background-color: #ffffff;
+        border-radius: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+
+    .opion-section {
+        /*background-color: #fbfbfb;*/
+
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 2rem;
+    }
+
+    .option-item {
+        /*background-color:crimson;*/
+
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .option-item label {
+            border: 2px solid #fbfbfb;
+            background-color: #fbfbfb;
+            border-radius: 1rem;
+            min-width: 50%;
+            text-align: center;
+            padding: 1rem;
+            cursor: pointer;
+        }
+
+        .option-item:not(.active) label:hover {
+            box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+        }
+
+        .option-item.active label {
+            background-color: rgba(127, 255, 212, 0.25);
+            border: 2px solid aquamarine;
+        }
 </style>
 
-<h1>@ViewBag.Title</h1>
+
+<section class="index-header">
+    <p>@ViewBag.ExamId</p>
+</section>
+<main class="takeQuizz-content">
+    <form>
+        @foreach (var question in Model.Item1)
+        {
+            <div>
+                <span>@question.QuestionText</span>
+                <div class="opion-section">
+                    @*<ul>*@
+                    @foreach (var option in Model.Item2.Where(o => o.QuestionId == question.QuestionId))
+                    {
+                        <div class="option-item">
+                            <input type="checkbox" id="@option.OptionId" name="@option.OptionId" hidden onchange="toggleOptionItemClass(this)" />
+                            <label for="@option.OptionId">@option.OptionText</label>
+                        </div>
+                    }
+                    @*</ul>*@
+                </div>
+            </div>
+        }
+    </form>
+</main>
+
+<script>
+    function toggleOptionItemClass(checkbox) {
+        var optionItem = checkbox.parentNode;
+        if (checkbox.checked) {
+            optionItem.classList.add("active");
+        } else {
+            optionItem.classList.remove("active");
+        }
+    }
+</script>
