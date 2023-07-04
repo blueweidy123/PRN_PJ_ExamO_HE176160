@@ -1,0 +1,102 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using PRN_ExamO_HE176160.Models
+@model List<Exam>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:ital,wght@0,200;0,400;0,500;0,600;0,700;0,800;0,1000;1,400;1,500&family=Oswald:wght@600&family=Roboto:wght@100;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+
+    body{
+        background-color: #fbfbfb;
+    }
+
+    *{
+        font-family: 'Bebas Neue', sans-serif;
+        font-family: 'Nunito', sans-serif;
+        font-family: 'Oswald', sans-serif;
+        font-family: 'Roboto', sans-serif;
+
+        transition: .3s all ease;
+    }
+
+    .index-header{
+        min-height:200px;
+
+        margin: 2rem;
+        padding: 1rem;
+
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        
+        background-color: #ffffff;
+        border-radius:1rem;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+        font-size: 3rem;
+        
+    }
+
+    .Exams-Container{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        padding: 2rem;
+    }
+
+    .Exam-card {
+        background-color: #ffffff;
+        border-radius: 1rem;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+        padding: 1rem;
+
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+
+        cursor:pointer;
+    }
+
+        .Exam-card span {
+            text-align: center;
+        }
+
+            .Exam-card span:nth-child(1) {
+                font-size: 2rem;
+            }
+
+            .Exam-card span:nth-child(2) {
+                color:darkgray;
+            }
+
+    .Exam-card:hover {
+        transform:translateY(-5%);
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+</style>
+
+<section class="index-header">
+    <p>Online English Exam</p>
+</section>
+<main>
+    <section class="Exams-Container">
+    @foreach (Exam e in Model)
+    {
+        <div class="Exam-card">
+                <span>@e.Title</span>
+                <span>@e.Description</span>
+        </div>
+    }
+    </section>
+</main>
