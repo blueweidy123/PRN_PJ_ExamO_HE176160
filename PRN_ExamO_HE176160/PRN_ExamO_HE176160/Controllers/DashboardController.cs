@@ -11,6 +11,7 @@ namespace PRN_ExamO_HE176160.Controllers
             {
                 ViewBag.Exams = context.Exams;
 
+
                 var Exams = context.Exams.ToList();
 
                 return View(Exams);

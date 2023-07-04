@@ -44,7 +44,9 @@ VALUES
 INSERT INTO Exams (ExamID, Title, Description, StartTime, EndTime)
 VALUES
     ('ENG01', 'ENG01', 'English Exam 1', '2023-07-01 09:00:00', '2023-07-01 10:30:00'),
-    ('ENG02', 'ENG02', 'EN2', '2023-07-02 14:00:00', NULL);
+    ('ENG02', 'ENG02', 'EN2', '2023-07-02 14:00:00', NULL),
+	('E1', 'Math Exam', 'A math exam covering various topics', '2023-07-01 09:00:00', '2023-07-01 10:30:00'),
+    ('E2', 'Science Exam', 'A science exam on biology, chemistry, and physics', '2023-07-02 14:00:00', '2023-07-02 15:30:00');
 
 	
 
