@@ -1,14 +1,14 @@
 USE master;
 GO
-DROP DATABASE IF EXISTS OnlineExam;
+DROP DATABASE IF EXISTS OnlineEnExam;
 GO
 
 -- Create the database
-CREATE DATABASE OnlineExam;
+CREATE DATABASE OnlineEnExam;
 GO
 
 -- Use the database
-USE OnlineExam;
+USE OnlineEnExam;
 GO
 
 -- Create the Users table

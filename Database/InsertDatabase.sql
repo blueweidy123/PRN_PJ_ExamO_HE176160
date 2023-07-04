@@ -1,5 +1,5 @@
 
-USE OnlineExam;
+USE OnlineEnExam;
 
 	/*
 	DELETE FROM Users;
@@ -43,8 +43,8 @@ VALUES
 	*/
 INSERT INTO Exams (ExamID, Title, Description, StartTime, EndTime)
 VALUES
-    ('PRN221', 'PRN221', 'Basic Cross-Platform Application Programming With .NET', '2023-07-01 09:00:00', '2023-07-01 10:30:00'),
-    ('SWP391', 'SWP391', 'Application development project', '2023-07-02 14:00:00', NULL);
+    ('ENG01', 'ENG01', 'English Exam 1', '2023-07-01 09:00:00', '2023-07-01 10:30:00'),
+    ('ENG02', 'ENG02', 'EN2', '2023-07-02 14:00:00', NULL);
 
 	
 
@@ -57,123 +57,127 @@ VALUES
 	SELECT * FROM Questions ORDER BY QuestionID ASC
 	DELETE FROM Questions WHERE ExamID LIKE 'PRN221';
 	*/
+
+	-- English Exam 1
 INSERT INTO Questions (ExamID, QuestionID, QuestionText)
 VALUES
-    ('PRN221', 'PRN01', 'What is the result of 9 + 6?'),
-    ('PRN221', 'PRN02', 'Solve: 4 * 5 - 3.'),
-    ('PRN221', 'PRN03', 'Calculate: 20 / 4 + 2.'),
-    ('PRN221', 'PRN04', 'Find the value of 5 cubed.'),
-    ('PRN221', 'PRN05', 'Evaluate: 12 - 6 * 3.'),
-    ('PRN221', 'PRN06', 'Simplify: 2 + 4 * 2.'),
-    ('PRN221', 'PRN07', 'Compute: 8 * 7 / 4.'),
-    ('PRN221', 'PRN08', 'What is the square root of 144?'),
-    ('PRN221', 'PRN09', 'Evaluate: 16 - 3 + 5.'),
-    ('PRN221', 'PRN10', 'Solve: 3 * (6 + 2) - 4.');
+    ('ENG01', 'ENG01', 'What is the capital of France?'),
+    ('ENG01', 'ENG02', 'Who wrote the play "Romeo and Juliet"?'),
+    ('ENG01', 'ENG03', 'What is the opposite of "happy"?'),
+    ('ENG01', 'ENG04', 'What is the past tense of the verb "go"?'),
+    ('ENG01', 'ENG05', 'What is the plural form of "child"?'),
+    ('ENG01', 'ENG06', 'What is the synonym of "beautiful"?'),
+    ('ENG01', 'ENG07', 'What is the superlative form of "good"?'),
+    ('ENG01', 'ENG08', 'What is the correct spelling of the word "receive"?'),
+    ('ENG01', 'ENG09', 'What is the meaning of the word "diligent"?'),
+    ('ENG01', 'ENG10', 'What is the main language spoken in Australia?');
 
-
+-- English Exam 2
 INSERT INTO Questions (ExamID, QuestionID, QuestionText)
 VALUES
-    ('SWP391', 'SWP01', 'What is the result of 2 + 2?'),
-    ('SWP391', 'SWP02', 'Solve: 5 * 3 - 7.'),
-    ('SWP391', 'SWP03', 'Calculate: 10 / 2 + 3.'),
-    ('SWP391', 'SWP04', 'Find the value of 8 squared.'),
-    ('SWP391', 'SWP05', 'Evaluate: 15 - 4 * 2.'),
-    ('SWP391', 'SWP06', 'Simplify: 3 + 2 * 4.'),
-    ('SWP391', 'SWP07', 'Compute: 7 * 6 / 3.'),
-    ('SWP391', 'SWP08', 'What is the square root of 64?'),
-    ('SWP391', 'SWP09', 'Evaluate: 12 - 5 + 8.'),
-    ('SWP391', 'SWP10', 'Solve: 2 * (4 + 3) - 5.');
+    ('ENG02', 'ENG11', 'Who wrote the novel "Pride and Prejudice"?'),
+    ('ENG02', 'ENG12', 'What is the plural form of "mouse"?'),
+    ('ENG02', 'ENG13', 'What is the opposite of "night"?'),
+    ('ENG02', 'ENG14', 'What is the present participle of the verb "run"?'),
+    ('ENG02', 'ENG15', 'What is the synonym of "angry"?'),
+    ('ENG02', 'ENG16', 'What is the comparative form of "tall"?'),
+    ('ENG02', 'ENG17', 'What is the correct spelling of the word "necessary"?'),
+    ('ENG02', 'ENG18', 'What is the meaning of the word "confidential"?'),
+    ('ENG02', 'ENG19', 'What is the capital of Japan?'),
+    ('ENG02', 'ENG20', 'What is the main language spoken in Brazil?');
 
 
 	/*
-	SELECT * FROM Options
-	DELETE FROM Options
+	SELECT * FROM Questions ORDER BY QuestionID ASC
+	DELETE FROM Options WHERE QuestionID LIKE 'PRN221';
 	*/
 INSERT INTO Options (QuestionID, OptionText, IsCorrectOption)
 VALUES
-    ('PRN01', '3', 0),
-    ('PRN01', '5', 0),
-    ('PRN01', '7', 0),
-    ('PRN01', '15', 1),
-    ('PRN02', '12', 0),
-    ('PRN02', '17', 0),
-    ('PRN02', '18', 0),
-    ('PRN02', '19', 1),
-    ('PRN03', '4', 0),
-    ('PRN03', '7', 0),
-    ('PRN03', '9', 0),
-    ('PRN03', '12', 1),
-    ('PRN04', '125', 0),
-    ('PRN04', '256', 1),
-    ('PRN04', '512', 0),
-    ('PRN04', '729', 0),
-    ('PRN05', '6', 0),
-    ('PRN05', '18', 0),
-    ('PRN05', '24', 1),
-    ('PRN05', '30', 0),
-    ('PRN06', '9', 0),
-    ('PRN06', '11', 0),
-    ('PRN06', '13', 1),
-    ('PRN06', '15', 0),
-    ('PRN07', '12', 0),
-    ('PRN07', '14', 0),
-    ('PRN07', '16', 1),
-    ('PRN07', '18', 0),
-    ('PRN08', '8', 0),
-    ('PRN08', '10', 0),
-    ('PRN08', '12', 0),
-    ('PRN08', '16', 1),
-    ('PRN09', '8', 0),
-    ('PRN09', '10', 0),
-    ('PRN09', '13', 0),
-    ('PRN09', '21', 1),
-    ('PRN10', '14', 0),
-    ('PRN10', '18', 0),
-    ('PRN10', '20', 1),
-    ('PRN10', '24', 0);
+    ('ENG01', 'Paris', 1),
+    ('ENG01', 'London', 0),
+    ('ENG01', 'Berlin', 0),
+    ('ENG01', 'Madrid', 0),
+    ('ENG02', 'William Shakespeare', 1),
+    ('ENG02', 'Charles Dickens', 0),
+    ('ENG02', 'Jane Austen', 0),
+    ('ENG02', 'Mark Twain', 0),
+    ('ENG03', 'Sad', 1),
+    ('ENG03', 'Angry', 0),
+    ('ENG03', 'Excited', 0),
+    ('ENG03', 'Joyful', 0),
+    ('ENG04', 'Went', 1),
+    ('ENG04', 'Gone', 0),
+    ('ENG04', 'Been', 0),
+    ('ENG04', 'Walked', 0),
+    ('ENG05', 'Children', 1),
+    ('ENG05', 'Childs', 0),
+    ('ENG05', 'Childes', 0),
+    ('ENG05', 'Childies', 0),
+    ('ENG06', 'Beautiful', 1),
+    ('ENG06', 'Ugly', 0),
+    ('ENG06', 'Pretty', 0),
+    ('ENG06', 'Attractive', 0),
+    ('ENG07', 'Best', 1),
+    ('ENG07', 'Better', 0),
+    ('ENG07', 'Goodest', 0),
+    ('ENG07', 'Great', 0),
+    ('ENG08', 'Receive', 1),
+    ('ENG08', 'Recieve', 0),
+    ('ENG08', 'Receeve', 0),
+    ('ENG08', 'Recive', 0),
+    ('ENG09', 'Hardworking', 1),
+    ('ENG09', 'Lazy', 0),
+    ('ENG09', 'Intelligent', 0),
+    ('ENG09', 'Talented', 0),
+    ('ENG10', 'English', 0),
+    ('ENG10', 'Spanish', 0),
+    ('ENG10', 'French', 0),
+    ('ENG10', 'Australian English', 1);
 
 INSERT INTO Options (QuestionID, OptionText, IsCorrectOption)
 VALUES
-    ('SWP01', '2', 0),
-    ('SWP01', '3', 0),
-    ('SWP01', '4', 1),
-    ('SWP01', '5', 0),
-    ('SWP02', '8', 0),
-    ('SWP02', '12', 1),
-    ('SWP02', '15', 0),
-    ('SWP02', '17', 0),
-    ('SWP03', '6', 0),
-    ('SWP03', '8', 0),
-    ('SWP03', '10', 1),
-    ('SWP03', '12', 0),
-    ('SWP04', '32', 0),
-    ('SWP04', '64', 1),
-    ('SWP04', '128', 0),
-    ('SWP04', '256', 0),
-    ('SWP05', '5', 0),
-    ('SWP05', '7', 0),
-    ('SWP05', '11', 1),
-    ('SWP05', '17', 0),
-    ('SWP06', '9', 0),
-    ('SWP06', '11', 1),
-    ('SWP06', '13', 0),
-    ('SWP06', '15', 0),
-    ('SWP07', '10', 0),
-    ('SWP07', '14', 1),
-    ('SWP07', '18', 0),
-    ('SWP07', '21', 0),
-    ('SWP08', '6', 0),
-    ('SWP08', '8', 0),
-    ('SWP08', '10', 0),
-    ('SWP08', '16', 1),
-    ('SWP09', '7', 0),
-    ('SWP09', '11', 1),
-    ('SWP09', '15', 0),
-    ('SWP09', '18', 0),
-    ('SWP10', '10', 0),
-    ('SWP10', '12', 1),
-    ('SWP10', '15', 0),
-    ('SWP10', '17', 0);
+    ('ENG11', 'Jane Austen', 1),
+    ('ENG11', 'William Shakespeare', 0),
+    ('ENG11', 'Mark Twain', 0),
+    ('ENG11', 'Charles Dickens', 0),
+    ('ENG12', 'Mice', 1),
+    ('ENG12', 'Mouses', 0),
+    ('ENG12', 'Meece', 0),
+    ('ENG12', 'Mousies', 0),
+    ('ENG13', 'Day', 1),
+    ('ENG13', 'Morning', 0),
+    ('ENG13', 'Sun', 0),
+    ('ENG13', 'Bright', 0),
+    ('ENG14', 'Running', 1),
+    ('ENG14', 'Runned', 0),
+    ('ENG14', 'Ran', 0),
+    ('ENG14', 'Runing', 0),
+    ('ENG15', 'Angry', 1),
+    ('ENG15', 'Happy', 0),
+    ('ENG15', 'Sad', 0),
+    ('ENG15', 'Excited', 0),
+    ('ENG16', 'Taller', 1),
+    ('ENG16', 'Tallest', 0),
+    ('ENG16', 'Tallish', 0),
+    ('ENG16', 'Talliest', 0),
+    ('ENG17', 'Necessary', 1),
+    ('ENG17', 'Neccessary', 0),
+    ('ENG17', 'Necessery', 0),
+    ('ENG17', 'Necesary', 0),
+    ('ENG18', 'Secret', 1),
+    ('ENG18', 'Open', 0),
+    ('ENG18', 'Public', 0),
+    ('ENG18', 'Confused', 0),
+    ('ENG19', 'Tokyo', 1),
+    ('ENG19', 'Osaka', 0),
+    ('ENG19', 'Kyoto', 0),
+    ('ENG19', 'Hiroshima', 0),
+    ('ENG20', 'Portuguese', 0),
+    ('ENG20', 'Spanish', 0),
+    ('ENG20', 'English', 0),
+    ('ENG20', 'Portuguese', 1);
+
+
 
 
 
