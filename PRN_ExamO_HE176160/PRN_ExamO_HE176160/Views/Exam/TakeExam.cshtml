@@ -30,10 +30,11 @@
     }
 
     .index-header {
-        min-height: 200px;
+        min-height: 150px;
         margin: 2rem;
         padding: 1rem;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         background-color: #ffffff;
@@ -42,12 +43,61 @@
         font-size: 3rem;
     }
 
+    .quest-nav {
+    }
+
+        .quest-nav span {
+        }
+
+        .quest-nav a {
+            font-size:2rem;
+            width:1rem;
+            background-color: #fbfbfb;
+            padding: .4rem 1rem;
+            border: 2px solid #fbfbfb;
+            border-radius:8px;
+            text-decoration:none;
+        }
+
     .takeQuizz-content {
         margin: 2rem;
         padding: 2rem;
         background-color: #ffffff;
         border-radius: 1rem;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+        /*display:flex;
+        flex-direction:row;*/
+    }
+
+        .takeQuizz-content form{
+            display: flex;
+            flex-direction: row;
+            align-items:center;
+
+            /*overflow-x:scroll;*/
+            overflow-x: hidden;
+        }
+
+        .takeQuizz-content form::-webkit-scrollbar {
+            display: none; 
+        }
+
+    .question-wrap{
+        width:100%;
+
+        display:flex;
+        flex-direction:column;
+
+        justify-content:space-between;
+
+        height: 50svh;
+
+        flex-shrink:0;
+    }
+
+    .q-text span{
+        font-size:1.5rem;
     }
 
     .opion-section {
@@ -71,10 +121,11 @@
     }
 
         .option-item label {
+            font-size:1.5rem;
             border: 2px solid #fbfbfb;
             background-color: #fbfbfb;
-            border-radius: 1rem;
-            min-width: 50%;
+            border-radius: 1.5rem;
+            min-width: 70%;
             text-align: center;
             padding: 1rem;
             cursor: pointer;
@@ -88,20 +139,37 @@
             background-color: rgba(127, 255, 212, 0.25);
             border: 2px solid aquamarine;
         }
+
+    .active-link {
+        background-color: rgba(127, 255, 212, 0.25) !important;
+        border: 2px solid aquamarine !important;
+    }
 </style>
 
 
 <section class="index-header">
-    <p>@ViewBag.ExamId</p>
+    <span>@ViewBag.ExamId : @ViewBag.ExamName</span>
+    <div class="quest-nav">
+    <span>
+        @foreach (var question in Model.Item1)
+        {
+            var questionId = "question-wrap-" + question.QuestionId;
+            var questionIndex = Model.Item1.IndexOf(question) + 1;
+            <a href="#@questionId" onclick="scrollToDiv(event, '@questionId')">@questionIndex</a>
+        }
+    </span>
+    </div>
 </section>
 <main class="takeQuizz-content">
     <form>
         @foreach (var question in Model.Item1)
         {
-            <div>
-                <span>@question.QuestionText</span>
+            var questionIndex = Model.Item1.IndexOf(question) + 1;
+            <div class="question-wrap" id="question-wrap-@question.QuestionId">
+                <div class ="q-text">
+                    <span> @questionIndex. @question.QuestionText</span>
+                </div>
                 <div class="opion-section">
-                    @*<ul>*@
                     @foreach (var option in Model.Item2.Where(o => o.QuestionId == question.QuestionId))
                     {
                         <div class="option-item">
@@ -109,7 +177,6 @@
                             <label for="@option.OptionId">@option.OptionText</label>
                         </div>
                     }
-                    @*</ul>*@
                 </div>
             </div>
         }
@@ -117,12 +184,24 @@
 </main>
 
 <script>
+    function scrollToDiv(event, targetId) {
+        event.preventDefault(); // Prevent default link behavior
+        var targetDiv = document.getElementById(targetId);
+        targetDiv.scrollIntoView({ behavior: "smooth" }); // Scroll to the target div smoothly
+    }
+
+
     function toggleOptionItemClass(checkbox) {
         var optionItem = checkbox.parentNode;
+        var questionId = optionItem.closest(".question-wrap").id.replace("question-wrap-", "");
+        var link = document.querySelector(`a[href="#question-wrap-${questionId}"]`);
+
         if (checkbox.checked) {
             optionItem.classList.add("active");
+            link.classList.add("active-link");
         } else {
             optionItem.classList.remove("active");
+            link.classList.remove("active-link");
         }
     }
 </script>
