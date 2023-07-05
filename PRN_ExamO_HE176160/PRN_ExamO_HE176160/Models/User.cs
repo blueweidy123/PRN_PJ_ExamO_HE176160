@@ -18,5 +18,10 @@ namespace PRN_ExamO_HE176160.Models
 
         public virtual ICollection<Result> Results { get; set; }
         public virtual ICollection<UserAnswer> UserAnswers { get; set; }
+
+        public override string? ToString()
+        {
+            return base.ToString();
+        }
     }
 }

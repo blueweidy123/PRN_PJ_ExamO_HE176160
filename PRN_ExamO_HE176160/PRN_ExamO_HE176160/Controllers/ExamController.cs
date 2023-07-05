@@ -14,7 +14,6 @@ namespace PRN_ExamO_HE176160.Controllers
                 ViewBag.ExamName = context.Exams.FirstOrDefault(e => e.ExamId == ExamId).Description;
 
                 List<Question> questions = context.Questions.Where(q => q.ExamId == ExamId).ToList();
-
                 List<Option> options = context.Options.Where(o => questions.Select(q => q.QuestionId).Contains(o.QuestionId)).ToList();
 
                 var tupleModel = new Tuple<List<Question>, List<Option>>(questions, options);

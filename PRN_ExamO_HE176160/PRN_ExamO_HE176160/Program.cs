@@ -11,16 +11,17 @@ namespace PRN_ExamO_HE176160
             // enable attribute routing
             app.MapControllers();
 
-            app.MapGet("/login", () =>
-            {
-                // Return the appropriate response for the /login route
-                return "Please log in to continue.";
-            });
+            app.MapControllerRoute(
+                name: "login",
+                pattern: "/login",
+                defaults: new { controller = "Dashboard", action = "Login" }
+            );
 
-            //app.MapControllerRoute(
-            //    name: "default",
-            //    pattern: "{controller=Dashboard}/{action=Index}"
-            //    );
+            app.MapControllerRoute(
+                name: "test",
+                pattern: "/test",
+                defaults: new { controller = "Dashboard", action = "test" }
+            );
 
             app.MapControllerRoute(
                 name: "home",

@@ -1,0 +1,30 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model PRN_ExamO_HE176160.Models.User
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Login";
+}
+
+
+<h2>Login</h2>
+
+<form asp-controller="Dashboard" asp-action="Login" method="post">
+    @*<input type="hidden" name="__RequestVerificationToken" value="@Html.AntiForgeryToken()" />*@
+
+    <div>
+        <label for="Email">Email</label>
+        <input type="text" id="Email" name="Email" />
+    </div>
+
+    <div>
+        <label for="Password">Password</label>
+        <input type="password" id="Password" name="Password" />
+    </div>
+
+    <div>
+        <input type="submit" value="Login" />
+    </div>
+</form>
