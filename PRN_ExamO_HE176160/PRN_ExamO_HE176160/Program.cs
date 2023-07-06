@@ -6,7 +6,13 @@ namespace PRN_ExamO_HE176160
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession();
+
             var app = builder.Build();
+
+            app.UseSession();
 
             // enable attribute routing
             app.MapControllers();
@@ -15,6 +21,12 @@ namespace PRN_ExamO_HE176160
                 name: "login",
                 pattern: "/login",
                 defaults: new { controller = "Dashboard", action = "Login" }
+            );
+
+            app.MapControllerRoute(
+                name: "logout",
+                pattern: "/logout",
+                defaults: new { controller = "Dashboard", action = "Logout" }
             );
 
             app.MapControllerRoute(

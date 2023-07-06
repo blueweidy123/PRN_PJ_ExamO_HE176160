@@ -1,5 +1,6 @@
 ﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 @using PRN_ExamO_HE176160.Models
+@using Microsoft.AspNetCore.Http
 
 @model List<Exam>
 
@@ -10,7 +11,8 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    string user = Context.Request.Query["user"];
+    string user = Context.Session.GetString("Uname");
+    int? userId = Context.Session.GetInt32("UId");
 }
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +39,7 @@
 
     .index-header {
         min-height: 200px;
-        margin: 2rem;
+        margin: 1rem 2rem;
         padding: 1rem;
         display: flex;
         justify-content: center;
@@ -97,18 +99,18 @@
 
 
 <section class="login-user">
-
-    @if (user != null)
+    @if (user != null && !user.Trim().Equals(""))
     {
-        <p>Welcome, @user  </p>
-        <a href="/home">  Logout</a>
+        <span>@user&nbsp </span>
+        <a href="/logout">  Logout</a>
     }
     else
     {
+        
         <a href="/login">Login</a>
     }
-
 </section>
+
 <section class="index-header">
     <p>Online English Exam</p>
 </section>
