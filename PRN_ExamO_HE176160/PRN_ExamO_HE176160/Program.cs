@@ -17,6 +17,7 @@ namespace PRN_ExamO_HE176160
             // enable attribute routing
             app.MapControllers();
 
+
             app.MapControllerRoute(
                 name: "login",
                 pattern: "/login",
@@ -41,6 +42,13 @@ namespace PRN_ExamO_HE176160
                 defaults: new { controller = "Dashboard", action = "Index" }
             );
 
+            app.MapControllerRoute(
+                name: "submitExam",
+                pattern: "/exam/submit",
+                defaults: new { controller = "Exam", action = "SubmitExam" }
+            );
+
+
             app.MapGet("/", context =>
             {
                 context.Response.Redirect("/home");
@@ -51,6 +59,7 @@ namespace PRN_ExamO_HE176160
             app.MapControllerRoute(
                 name: "exam",
                 pattern: "/exam/{ExamId}",
+                //defaults: new { controller = "Quizz", action = "showQuizz" }
                 defaults: new { controller = "Exam", action = "TakeExam" }
             );
 
