@@ -2,6 +2,7 @@
 USE OnlineEnExam;
 
 	/*
+	SELECT * FROM Users
 	DELETE FROM Users;
 	*/
 INSERT INTO Users (Name, Email, Password)
@@ -185,7 +186,9 @@ VALUES
     ('ENG20', 'English', 0),
     ('ENG20', 'Portuguese', 1);
 
-
+	/*
+	DELETE FROM UserAnswers
+	*/
 
 
 

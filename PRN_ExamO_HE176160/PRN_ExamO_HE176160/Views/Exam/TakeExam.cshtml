@@ -293,33 +293,36 @@
         <button id="startButton">Start</button>
     </div>
     <div class="takeQuizz-wrap">
-        <form id="quiz-form" asp-controller="Exam" asp-action="SubmitExam" method="post">
 
+        <form id="quiz-form" asp-controller="Exam" asp-action="SubmitExam" method="post">
             <div class="tq-form">
                 <section class="takeQuizz-content">
-                        @foreach (var question in Model.Item1)
-                        {
-                            var questionIndex = Model.Item1.IndexOf(question) + 1;
+                    @foreach (var question in Model.Item1)
+                    {
+                        var questionIndex = Model.Item1.IndexOf(question) + 1;
+                        <div class="question-wrap" id="question-wrap-@question.QuestionId">
 
-                            <div class="question-wrap" id="question-wrap-@question.QuestionId">
-
-                                <div class="q-text">
-                                    <span> @questionIndex. @question.QuestionText</span>
-                                </div>
-
-                                <div class="opion-section">
-                                    @foreach (var option in Model.Item2.Where(o => o.QuestionId == question.QuestionId))
-                                    {
-                                        <div class="option-item">
-                                            <input type="checkbox" id="@option.OptionId" name="selectedOptions" hidden onchange="toggleOptionItemClass(this)" value="@option.OptionId" />
-                                            <label for="@option.OptionId">@option.OptionText</label>
-                                        </div>
-                                    }
-                                </div>
-
+                            <div class="q-text">
+                                <span> @questionIndex. @question.QuestionText</span>
                             </div>
 
-                        }
+                            <div class="opion-section">
+                                @foreach (var option in Model.Item2.Where(o => o.QuestionId == question.QuestionId))
+                                {
+
+                                    <input type="hidden" name="userAnswers.Index" value="@question.QuestionId" />
+                                    <input type="hidden" name="userAnswers[@question.QuestionId].QuestionId" value="@question.QuestionId" />
+                                    <input type="hidden" name="userAnswers[@question.QuestionId].ExamId" value="@ViewBag.ExamId" />
+                                    <input type="hidden" name="userAnswers[@question.QuestionId].UserId" value="@userId" />
+
+                                    <div class="option-item">
+                                        <input type="checkbox" id="@option.OptionId" name="userAnswers[@question.QuestionId].SelectedOptionId" hidden onchange="toggleOptionItemClass(this)" value="@option.OptionId" />
+                                        <label for="@option.OptionId">@option.OptionText</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
                 </section>
                 <section class="takeQuizz-util">
                     <span id="timer">30:00</span>
@@ -327,6 +330,7 @@
                 </section>
             </div>
         </form>
+
     </div>
 </main>
 
@@ -362,7 +366,7 @@
     });
 
     function startCountdown() {
-        let timeLeft = 1 * 5;
+        let timeLeft = 1 * 30;
 
         const countdownInterval = setInterval(() => {
             const minutes = Math.floor(timeLeft / 60);

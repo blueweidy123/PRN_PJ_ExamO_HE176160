@@ -34,20 +34,44 @@ namespace PRN_ExamO_HE176160.Controllers
             }
         }
 
-
-
         [HttpPost]
-        public IActionResult SubmitExam(List<int> selectedOptions)
+        public IActionResult SubmitExam(List<UserAnswer> userAnswers)
         {
-
             Debug.WriteLine("Selected options:");
-            foreach (int optionId in selectedOptions)
+
+            using (var context = new OnlineEnExamContext())
             {
-                Debug.WriteLine("Selected option: " + optionId);
+                foreach (UserAnswer userAnswer in userAnswers)
+                {
+                    // test
+                    Debug.WriteLine($"Question ID: {userAnswer.QuestionId}");
+                    Debug.WriteLine($"Exam ID: {userAnswer.ExamId}");
+                    Debug.WriteLine($"Selected Option ID: {userAnswer.SelectedOptionId}");
+
+                    context.UserAnswers.Add(userAnswer);
+                }
+
+                context.SaveChanges();
             }
 
             return RedirectToAction("Index", "Dashboard");
         }
+
+
+        //[HttpPost]
+        //public IActionResult SubmitExam(List<int> selectedOptions)
+        //{
+
+        //    Debug.WriteLine("Selected options:");
+        //    foreach (int optionId in selectedOptions)
+        //    {
+        //        Debug.WriteLine("Selected option: " + optionId);
+        //    }
+
+
+
+        //    return RedirectToAction("Index", "Dashboard");
+        //}
 
 
     }
