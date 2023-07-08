@@ -22,6 +22,7 @@ namespace PRN_ExamO_HE176160.Controllers
             }
             using (var context = new OnlineEnExamContext())
             {
+
                 Debug.WriteLine($"Start Exam......");
                 ViewBag.ExamId = ExamId;
                 ViewBag.ExamName = context.Exams.FirstOrDefault(e => e.ExamId == ExamId).Description;
@@ -64,8 +65,28 @@ namespace PRN_ExamO_HE176160.Controllers
 
             using (var context = new OnlineEnExamContext())
             {
+
+                int correctOptionCount = context.Exams
+                .Where(e => e.ExamId == userAnswers[0].ExamId)
+                .SelectMany(e => e.Questions)
+                .SelectMany(q => q.Options)
+                .Count(o => o.IsCorrectOption == true);
+
+                Debug.WriteLine($"Number of Correct Options in the Exam: {correctOptionCount}");
+
+                double totalRightAnswer = 0;
+
+
+                Debug.WriteLine("total correect:" + correctOptionCount);
+
                 foreach (UserAnswer userAnswer in userAnswers)
                 {
+                    Option selectedOption = context.Options.Find(userAnswer.SelectedOptionId);
+                    if (selectedOption != null && selectedOption.IsCorrectOption == true)
+                    {
+                        totalRightAnswer ++;
+                    }
+
                     // test
                     Debug.WriteLine($"Question ID: {userAnswer.QuestionId}");
                     Debug.WriteLine($"Exam ID: {userAnswer.ExamId}");
@@ -73,10 +94,15 @@ namespace PRN_ExamO_HE176160.Controllers
 
                     context.UserAnswers.Add(userAnswer);
 
-                    // Calculate and save the mark
-                    CalculateAndSaveMark(context, userAnswer);
                 }
 
+                Debug.WriteLine($"answer right: {totalRightAnswer}");
+                context.Results.Add(new Result
+                {
+                    UserId = userAnswers[0].UserId,
+                    ExamId = userAnswers[0].ExamId,
+                    Marks = (totalRightAnswer/correctOptionCount)*10
+                });
                 context.SaveChanges();
             }
 
@@ -112,29 +138,11 @@ namespace PRN_ExamO_HE176160.Controllers
             {
                 UserId = userAnswer.UserId,
                 ExamId = userAnswer.ExamId,
-                Marks = (int)mark
+                Marks = mark
             };
 
-            // Add the result to the context
             context.Results.Add(result);
         }
-
-
-        //[HttpPost]
-        //public IActionResult SubmitExam(List<int> selectedOptions)
-        //{
-
-        //    Debug.WriteLine("Selected options:");
-        //    foreach (int optionId in selectedOptions)
-        //    {
-        //        Debug.WriteLine("Selected option: " + optionId);
-        //    }
-
-
-
-        //    return RedirectToAction("Index", "Dashboard");
-        //}
-
 
     }
 }

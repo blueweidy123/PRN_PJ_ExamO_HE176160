@@ -63,7 +63,10 @@ CREATE TABLE Results (
     ResultID INT IDENTITY(1,1) PRIMARY KEY,
     UserID INT,
     ExamID VARCHAR(50),
-    Marks INT,
+    Marks DECIMAL(10,2),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (ExamID) REFERENCES Exams(ExamID)
 );
+
+ALTER TABLE Results
+ALTER COLUMN Marks DECIMAL(10,2);
