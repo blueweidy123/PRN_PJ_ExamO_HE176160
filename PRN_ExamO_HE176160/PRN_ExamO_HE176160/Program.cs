@@ -59,8 +59,13 @@ namespace PRN_ExamO_HE176160
             app.MapControllerRoute(
                 name: "exam",
                 pattern: "/exam/{ExamId}",
-                //defaults: new { controller = "Quizz", action = "showQuizz" }
                 defaults: new { controller = "Exam", action = "TakeExam" }
+            );
+
+            app.MapControllerRoute(
+                name: "exam",
+                pattern: "/postExam/{ExamId}",
+                defaults: new { controller = "Exam", action = "PostSubmit" }
             );
 
             app.Run();

@@ -1,0 +1,92 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using PRN_ExamO_HE176160.Models
+@using Microsoft.AspNetCore.Http
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    string user = Context.Session.GetString("Uname");
+    int? userId = Context.Session.GetInt32("UId");
+}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:ital,wght@0,200;0,400;0,500;0,600;0,700;0,800;0,1000;1,400;1,500&family=Oswald:wght@600&family=Roboto:wght@100;400;500;700&display=swap" rel="stylesheet">
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://unpkg.com/jquery"></script>
+
+<style>
+
+
+    body {
+        background-color: #fbfbfb;
+        padding: 0 !important;
+    }
+
+    * {
+        font-family: 'Bebas Neue', sans-serif;
+        font-family: 'Nunito', sans-serif;
+        font-family: 'Oswald', sans-serif;
+        font-family: 'Roboto', sans-serif;
+        color: #4d4d4d;
+        border: 1px solid red !important;
+        transition: .3s all ease;
+    }
+
+    .login-user {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        /*justify-content: flex-end;*/
+        justify-content: space-between;
+        margin: 1rem 2rem;
+    }
+
+        .login-user ion-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+    .index-header {
+        min-height: 150px;
+        margin: 0 2rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        border-radius: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        font-size: 3rem;
+        overflow: hidden;
+    }
+
+    .msg{
+        margin-top:200px;
+    }
+
+    .msg p{
+        text-align:center;
+        font-size:1.4rem;
+    }
+
+</style>
+
+<section class="login-user">
+    <a href="/home"><ion-icon name="chevron-back-outline"></ion-icon></a>
+
+    @if (user != null && !user.Trim().Equals(""))
+    {
+        <span>@user&nbsp</span>
+    }
+</section>
+<section class="index-header">
+    <span>@ViewBag.ExamId : @ViewBag.ExamName</span>
+</section>
+<section class="msg">
+    <p>Congratulation!!! You have already finished this Exam. <a href="#">View your answer</a></p>
+</section>
