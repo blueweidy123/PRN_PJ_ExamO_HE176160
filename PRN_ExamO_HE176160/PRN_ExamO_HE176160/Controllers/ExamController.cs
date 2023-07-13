@@ -68,7 +68,7 @@ namespace PRN_ExamO_HE176160.Controllers
 
                 Debug.WriteLine($"Number of Correct Options in the Exam: {correctOptionCount}");
 
-                double totalRightAnswer = 0;
+                decimal totalRightAnswer = 0;
 
 
                 Debug.WriteLine("total correect:" + correctOptionCount);

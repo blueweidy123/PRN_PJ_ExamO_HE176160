@@ -7,7 +7,7 @@ SELECT [UserAnswerID]
 	  ,[o].[IsCorrectOption]
   FROM [OnlineEnExam].[dbo].[UserAnswers] as a LEFT Join [OnlineEnExam].[dbo].[Options] as o on [a].[QuestionID] = [o].[QuestionID]
 
-  SELECT ua.*, o.IsCorrectOption
+SELECT ua.*, o.IsCorrectOption
 FROM [OnlineEnExam].[dbo].[UserAnswers] ua
 JOIN [OnlineEnExam].[dbo].[Options] o ON ua.SelectedOptionID = o.OptionID
 

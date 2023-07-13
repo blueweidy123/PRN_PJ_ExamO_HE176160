@@ -48,7 +48,6 @@ namespace PRN_ExamO_HE176160
                 defaults: new { controller = "Exam", action = "SubmitExam" }
             );
 
-
             app.MapGet("/", context =>
             {
                 context.Response.Redirect("/home");
@@ -60,6 +59,12 @@ namespace PRN_ExamO_HE176160
                 name: "exam",
                 pattern: "/exam/{ExamId}",
                 defaults: new { controller = "Exam", action = "TakeExam" }
+            );
+
+            app.MapControllerRoute(
+                name: "showResult",
+                pattern: "/exam/result/{ExamId}",
+                defaults: new { controller = "Result", action = "ShowResult" }
             );
 
             app.MapControllerRoute(

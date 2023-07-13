@@ -32,7 +32,7 @@
         font-family: 'Oswald', sans-serif;
         font-family: 'Roboto', sans-serif;
         color: #4d4d4d;
-        border: 1px solid red !important;
+        /*border: 1px solid red !important;*/
         transition: .3s all ease;
     }
 
@@ -88,5 +88,5 @@
     <span>@ViewBag.ExamId : @ViewBag.ExamName</span>
 </section>
 <section class="msg">
-    <p>Congratulation!!! You have already finished this Exam. <a href="#">View your answer</a></p>
+    <p>Congratulation!!! You have already finished this Exam. <a href="/exam/result/@ViewBag.ExamId">View your answer</a></p>
 </section>

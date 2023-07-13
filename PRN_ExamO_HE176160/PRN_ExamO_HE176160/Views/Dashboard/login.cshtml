@@ -8,23 +8,64 @@
     ViewBag.Title = "Login";
 }
 
+<style>
 
+    .login-form {
+        width:fit-content;
+        position:fixed;
+        top:50%;
+        left:50%;
+        transform:translate(-50%, -50%);
+        padding:2rem;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        border-radius:2rem;
+    }
+
+    .login-form input{
+        padding: 4px 8px;
+        font-size:1.4rem;
+        border-radius:.5rem;
+    }
+
+    #sm-btn {
+        padding: .4rem 1rem;
+        font-size: 1.4rem;
+        width:100%;
+        background-color:white;
+        border-radius: 1rem;
+    }
+</style>
+
+<div class="login-form">
 <h2>Login</h2>
 
 <form asp-controller="Dashboard" asp-action="Login" method="post">
     @*<input type="hidden" name="__RequestVerificationToken" value="@Html.AntiForgeryToken()" />*@
+    <table>
+        <tr>
+            <td>
+                    <label for="Email">Email</label>
+            </td>
+            <td>
+                    <input type="text" id="Email" name="Email" />
+            </td>
+        </tr>
+            <tr>
+                <td>
+                    <label for="Email">Password</label>
+                </td>
+                <td>
+                    <input type="password" id="Password" name="Password" />
+                </td>
+            </tr>
+            <tr>
+                <td>
 
-    <div>
-        <label for="Email">Email</label>
-        <input type="text" id="Email" name="Email" />
-    </div>
-
-    <div>
-        <label for="Password">Password</label>
-        <input type="password" id="Password" name="Password" />
-    </div>
-
-    <div>
-        <input type="submit" value="Login" />
-    </div>
+                </td>
+                <td>
+                    <input id="sm-btn" type="submit" value="Login" />
+                </td>
+            </tr>
+    </table>
 </form>
+</div>
