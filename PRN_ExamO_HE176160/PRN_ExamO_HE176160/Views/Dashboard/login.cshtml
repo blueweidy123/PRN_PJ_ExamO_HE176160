@@ -8,7 +8,26 @@
     ViewBag.Title = "Login";
 }
 
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:ital,wght@0,200;0,400;0,500;0,600;0,700;0,800;0,1000;1,400;1,500&family=Oswald:wght@600&family=Roboto:wght@100;400;500;700&display=swap" rel="stylesheet">
+
+
+    
+
 <style>
+
+    * {
+        font-family: 'Bebas Neue', sans-serif;
+        font-family: 'Nunito', sans-serif;
+        font-family: 'Oswald', sans-serif;
+        font-family: 'Roboto', sans-serif;
+        color: #4d4d4d;
+        /*border: 1px solid red !important;*/
+
+        transition: .3s all ease;
+    }
 
     .login-form {
         width:fit-content;
@@ -31,17 +50,29 @@
         padding: .4rem 1rem;
         font-size: 1.4rem;
         width:100%;
+        cursor:pointer;
         background-color:white;
         border-radius: 1rem;
     }
-</style>
+
+    #sm-btn:hover{
+        background-color:black;
+        color:white;
+    }
+    
+    </style>
 
 <div class="login-form">
-<h2>Login</h2>
 
 <form asp-controller="Dashboard" asp-action="Login" method="post">
     @*<input type="hidden" name="__RequestVerificationToken" value="@Html.AntiForgeryToken()" />*@
     <table>
+        <tr>
+            <td></td>
+            <td>
+                    <h2>Login</h2>
+            </td>
+        </tr>
         <tr>
             <td>
                     <label for="Email">Email</label>
