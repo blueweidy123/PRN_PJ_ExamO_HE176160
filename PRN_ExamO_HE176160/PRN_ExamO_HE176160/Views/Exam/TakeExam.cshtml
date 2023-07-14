@@ -316,7 +316,9 @@
                                 {
 
                                     <div class="option-item">
-                                        <input type="checkbox" id="@option.OptionId" name="userAnswers[@question.QuestionId].SelectedOptionId" hidden onchange="toggleOptionItemClass(this)" value="@option.OptionId" />
+                                        <input type="radio" id="@option.OptionId" name="userAnswers[@question.QuestionId].SelectedOptionId" hidden onchange="toggleOptionItemClass(this)" value="@option.OptionId" />
+                                        @*<input type="checkbox" id="@option.OptionId" name="userAnswers[@question.QuestionId].SelectedOptionId" hidden onchange="toggleOptionItemClass(this)" value="@option.OptionId" />*@
+
                                         <label for="@option.OptionId">@option.IsCorrectOption|@option.OptionText</label>
                                     </div>
                                 }
@@ -357,7 +359,7 @@
     });
 
     function startCountdown() {
-        let timeLeft = 1 * 30;
+        let timeLeft = 1 * 10;
 
         const countdownInterval = setInterval(() => {
             const minutes = Math.floor(timeLeft / 60);

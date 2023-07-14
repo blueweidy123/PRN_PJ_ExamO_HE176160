@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using PRN_ExamO_HE176160.Models;
 
 namespace PRN_ExamO_HE176160.Controllers
@@ -42,21 +43,13 @@ namespace PRN_ExamO_HE176160.Controllers
                         Question = x.UserAnswer.Question,
                         User = x.UserAnswer.User
                     })
-                    .ToList();
+                .ToList();
 
-                return View(userAnswers);
+                var tupleModel = new Tuple<List<UserAnswer>, List<Option>>(userAnswers, context.Options.ToList());
 
-                //var userAnswers = context.UserAnswers
-                //.Where(ua => ua.UserId == userId && ua.ExamId == ExamId)
-                //.ToList();
+                //return View(userAnswers);
+                return View(tupleModel);
 
-                //var questions = context.Questions
-                //    .Where(q => q.ExamId == ExamId)
-                //    .ToList();
-
-                //var model = new Tuple<List<UserAnswer>, List<Question>>(userAnswers, questions);
-
-                //return View(model);
             }
         }
     }

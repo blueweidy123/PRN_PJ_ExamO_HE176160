@@ -9,9 +9,9 @@
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 @using PRN_ExamO_HE176160.Models
 @using Microsoft.AspNetCore.Http
-@model List<UserAnswer>
+@*@model List<UserAnswer>*@
 @*@model List<Question>*@
-@*@model Tuple<List<UserAnswer>, List<Question>>*@
+@model Tuple<List<UserAnswer>, List<Option>>
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -122,7 +122,7 @@
     </thead>
     <tbody>
         
-        @foreach (UserAnswer ua in Model){
+        @foreach (UserAnswer ua in Model.Item1){
 
             @if (userId == ua.UserId && @ViewBag.ExamId == ua.ExamId)
             {
@@ -138,9 +138,13 @@
                     </td>
                     <td>
                         @{
-                            var correctOption = ua.Question.Options.FirstOrDefault(o => o.IsCorrectOption == true);
+                            var copt = Model.Item2.FirstOrDefault(o => o.QuestionId == ua.QuestionId && o.IsCorrectOption == true);
                         }
-                        @correctOption?.OptionText
+                        @*@foreach (Option opt in Model.Item2)
+                        {
+                            
+                        }*@
+                        @copt?.OptionText
                     </td>
                 </tr>
             }
