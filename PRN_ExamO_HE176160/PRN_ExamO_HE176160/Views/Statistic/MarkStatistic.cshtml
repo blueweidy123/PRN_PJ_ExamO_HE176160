@@ -1,0 +1,179 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<style>
+    .sta-container {
+        width: 90vw;
+        height: 90vh;
+
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);*/
+        background-color: aquamarine;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+
+
+        .sta-container table {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-between;
+            border-radius:2rem;
+            overflow:hidden;
+        }
+
+    tr {
+        width: 90vw;
+        
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    td {
+        width: calc(90vw / 10);
+        height:90vh;
+        text-align: center;
+        background-color: palevioletred;
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-end;
+    }
+
+    .c-1 {
+        background-color: aquamarine;
+        width: calc(90vw / 10);
+        height: calc(90vh / 10 * 1);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .c-2 {
+        background-color: aquamarine;
+        width: calc(90vw / 10);
+        height: calc(90vh / 10 * 2);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .c-3 {
+        background-color: aquamarine;
+        width: calc(90vw / 10);
+        height: calc(90vh / 10 * 3);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .c-4{
+        background-color: aquamarine;
+        width: calc(90vw / 10);
+        height: calc(90vh / 10 * 4);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+    
+    .c-5 {
+        background-color: aquamarine;
+        width: calc(90vw / 10);
+        height: calc(90vh / 10 * 5);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .c-6 {
+        background-color: aquamarine;
+        width: calc(90vw / 10);
+        height: calc(90vh / 10 * 6);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .c-7 {
+        background-color: aquamarine;
+        width: calc(90vw / 10);
+        height: calc(90vh / 10 * 7);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .c-8 {
+        background-color: aquamarine;
+        width: calc(90vw / 10);
+        height: calc(90vh / 10 * 8);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .c-9 {
+        background-color: aquamarine;
+        width: calc(90vw / 10);
+        height: calc(90vh / 10 * 9);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .c-10 {
+        background-color: aquamarine;
+        width: calc(90vw / 10);
+        height: calc(90vh / 10 * 10);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+</style>
+
+<h1>mark statistic</h1>
+
+<section class="sta-container">
+    <table>
+        <tr>
+            <td>
+                <div class="c-@ViewBag.c1"><span>@ViewBag.c1</span></div>
+                <div>0-1</div>
+            </td>
+            <td>
+                <div class="c-@ViewBag.c2"><span>@ViewBag.c2</span></div>
+                <div>1-2</div>
+            </td>
+            <td>
+                <div class="c-@ViewBag.c3"><span>@ViewBag.c3</span></div>
+                <div>2-3</div>
+            </td>
+            <td>
+                <div class="c-@ViewBag.c4"><span>@ViewBag.c4</span></div>
+                <div>3-4</div>
+            </td>
+            <td>
+                <div class="c-@ViewBag.c5"><span>@ViewBag.c5</span></div>
+                <div>4-5</div>
+            </td>
+            <td>
+                <div class ="c-@ViewBag.c6"><span>@ViewBag.c6</span></div>
+                <div>5-6</div>
+            </td>
+            <td>
+                <div class="c-@ViewBag.c7"><span>@ViewBag.c7</span></div>
+                <div>6-7</div>
+            </td>
+            <td>
+                <div class="c-@ViewBag.c8"><span>@ViewBag.c8</span></div>
+                <div>7-8</div>
+            </td>
+            <td>
+                <div class="c-@ViewBag.c9"><span>@ViewBag.c9</span></div>
+                <div>8-9</div>
+            </td>
+            <td>
+                <div class="c-@ViewBag.c10"><span>@ViewBag.c10</span></div>
+                <div>9-10</div>
+            </td>
+        </tr>
+    </table>
+</section>

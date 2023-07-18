@@ -73,6 +73,12 @@ namespace PRN_ExamO_HE176160
                 defaults: new { controller = "Exam", action = "PostSubmit" }
             );
 
+            app.MapControllerRoute(
+                name: "statistic",
+                pattern: "/statistic",
+                defaults: new { controller = "Statistic", action = "MarkStatistic" }
+            );
+
             app.Run();
         }
     }

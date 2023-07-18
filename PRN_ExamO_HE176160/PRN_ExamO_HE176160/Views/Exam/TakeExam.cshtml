@@ -249,10 +249,11 @@
             box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
         }
 
-        .option-item.active label {
-            background-color: rgba(127, 255, 212, 0.25);
-            border: 2px solid aquamarine;
-        }
+
+    .opion-section input[type="radio"]:checked + label {
+        background-color: rgba(127, 255, 212, 0.25);
+        border: 2px solid aquamarine;
+    }
 
     .active-link {
         background-color: rgba(127, 255, 212, 0.25) !important;
@@ -317,7 +318,7 @@
 
                                     <div class="option-item">
                                         <input type="radio" id="@option.OptionId" name="userAnswers[@question.QuestionId].SelectedOptionId" hidden onchange="toggleOptionItemClass(this)" value="@option.OptionId" />
-                                        @*<input type="checkbox" id="@option.OptionId" name="userAnswers[@question.QuestionId].SelectedOptionId" hidden onchange="toggleOptionItemClass(this)" value="@option.OptionId" />*@
+
 
                                         <label for="@option.OptionId">@option.IsCorrectOption|@option.OptionText</label>
                                     </div>
@@ -359,7 +360,7 @@
     });
 
     function startCountdown() {
-        let timeLeft = 1 * 10;
+        let timeLeft = 2 * 60;
 
         const countdownInterval = setInterval(() => {
             const minutes = Math.floor(timeLeft / 60);
@@ -394,10 +395,10 @@
         var link = document.querySelector(`a[href="#question-wrap-${questionId}"]`);
 
         if (checkbox.checked) {
-            optionItem.classList.add("active");
+            //optionItem.classList.add("active");
             link.classList.add("active-link");
         } else {
-            optionItem.classList.remove("active");
+            //optionItem.classList.remove("active");
             link.classList.remove("active-link");
         }
     }

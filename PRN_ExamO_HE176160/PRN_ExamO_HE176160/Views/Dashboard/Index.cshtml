@@ -116,7 +116,18 @@
 </section>
 
 <main>
+    <div style="margin:0 2rem">
+        <h1>
+            <a href="/statistic" >Statistic</a>
+        </h1>
+    </div>
+    <div style="margin:0 2rem">
+        <h1>
+            On going Exam
+        </h1>
+    </div>
     <section class="Exams-Container">
+        
         @foreach (Exam e in Model)
         {
             <div class="Exam-card" onclick="window.location.href = '/exam/@e.ExamId'">
