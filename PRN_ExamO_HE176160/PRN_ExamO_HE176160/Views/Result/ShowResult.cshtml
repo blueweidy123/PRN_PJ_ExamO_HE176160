@@ -36,7 +36,6 @@
         font-family: 'Oswald', sans-serif;
         font-family: 'Roboto', sans-serif;
         color: #4d4d4d;
-        /*border: 1px solid red !important;*/
         transition: .3s all ease;
     }
 
@@ -69,20 +68,29 @@
         overflow: hidden;
     }
 
-    .user-answer{
-        display:flex;
-        flex-direction:row;
+    .user-answer {
+        display: flex;
+        flex-direction: row;
     }
 
     .ua-tb {
-        width:100%;
-
-        padding:2rem;
+        width: 100%;
+        padding: 2rem;
     }
 
-    .ua-tb td {
-        text-align:center;
-        
+        .ua-tb td {
+            text-align: center;
+        }
+
+    .row--head {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        width: 100%;
+        border-radius: 1rem;
+        margin: 8px;
     }
 </style>
 
@@ -96,36 +104,43 @@
 </section>
 <section class="index-header">
     <span>@ViewBag.ExamId : @ViewBag.ExamName</span>
-    <span>Mark: @ViewBag.Mark / 10</span>
+    @*<span>Mark: @ViewBag.Mark / 10</span>*@
 </section>
 
 
-<table class="ua-tb">
-    <thead>
-        <th>
-            Question Id
-        </th>
-        <th>
-            Question
-        </th>
-        <th>
-            User Answer
-        </th>
-        
-        <th>
-            Correct Answer
-        </th>
-    </thead>
-    <tbody>
-        
-        @foreach (UserAnswer ua in Model.Item1){
 
-            @if (userId == ua.UserId && @ViewBag.ExamId == ua.ExamId)
+<table class="ua-tb">
+    @foreach (Result r in @ViewBag.results)
+    {
+        <thead>
+            <tr class="row--head">
+                <th colspan="4">
+                    <h2>Attemp: @r.Attemp |Mark: @r.Marks</h2>
+                </th>
+            </tr>
+
+            <tr>
+                <th>
+                    Question
+                </th>
+                <th>
+                    User Answer
+                </th>
+
+                <th>
+                    Correct Answer
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (UserAnswer ua in Model.Item1)
+        {
+
+            @if (userId == ua.UserId && @ViewBag.ExamId == ua.ExamId && ua.Attemp == r.Attemp)
             {
-                <tr style="@(ua.SelectedOption?.IsCorrectOption == true ? "" : "background-color:palevioletred;")">
-                    <td>
-                        @ua.QuestionId
-                    </td>
+                <tr style="@(ua.SelectedOption?.IsCorrectOption == true ? "" : "background-color:rgba(219, 112, 147, 0.5);")">
+
                     <td>
                         @ua.Question.QuestionText
                     </td>
@@ -142,7 +157,9 @@
                 </tr>
             }
         }
-    </tbody>
+        </tbody>
+    }
+
 </table>
 
 

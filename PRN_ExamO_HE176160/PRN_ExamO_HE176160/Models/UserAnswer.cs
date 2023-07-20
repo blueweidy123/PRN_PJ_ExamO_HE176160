@@ -11,6 +11,8 @@ namespace PRN_ExamO_HE176160.Models
         public string? QuestionId { get; set; }
         public int? SelectedOptionId { get; set; }
 
+        public int Attemp { get; set; }
+
         public virtual Exam? Exam { get; set; }
         public virtual Question? Question { get; set; }
         public virtual Option? SelectedOption { get; set; }

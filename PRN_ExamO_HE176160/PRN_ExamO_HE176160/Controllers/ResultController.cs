@@ -42,9 +42,13 @@ namespace PRN_ExamO_HE176160.Controllers
                         SelectedOption = x.Option,
                         Exam = x.UserAnswer.Exam,
                         Question = x.UserAnswer.Question,
-                        User = x.UserAnswer.User
+                        User = x.UserAnswer.User,
+                        Attemp = x.UserAnswer.Attemp
                     })
                 .ToList();
+
+                var results = context.Results.Where(r => r.UserId == userId).ToList();
+                ViewBag.results = results;
 
                 var tupleModel = new Tuple<List<UserAnswer>, List<Option>>(userAnswers, context.Options.ToList());
 
