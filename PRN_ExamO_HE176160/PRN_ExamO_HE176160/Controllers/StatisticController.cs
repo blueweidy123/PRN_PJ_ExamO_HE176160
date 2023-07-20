@@ -5,7 +5,7 @@ namespace PRN_ExamO_HE176160.Controllers
 {
     public class StatisticController : Controller
     {
-        public IActionResult MarkStatistic()
+        public IActionResult MarkStatistic(int range, string selectedExamId)
         {
             int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7 = 0, c8 = 0, c9 = 0, c10 = 0;
             using (OnlineEnExamContext context = new OnlineEnExamContext())
@@ -65,10 +65,25 @@ namespace PRN_ExamO_HE176160.Controllers
                 ViewBag.c8 = c8;
                 ViewBag.c9 = c9;
                 ViewBag.c10 = c10;
-            }
+                ViewBag.total = results.Count();
 
-            return View();
+                var rs = context.Results.ToList();
+                var users = context.Users.ToList();
+                var exams = context.Exams.ToList();
+
+                ViewBag.exams = exams;
+                ViewBag.users = users;
+                ViewBag.range = range;
+                ViewBag.fil = selectedExamId;
+                return View(rs);
+            }
         }
 
+
+        public IActionResult MarkRange(int range)
+        {
+            ViewBag.range = range;
+            return View();
+        }
     }
 }

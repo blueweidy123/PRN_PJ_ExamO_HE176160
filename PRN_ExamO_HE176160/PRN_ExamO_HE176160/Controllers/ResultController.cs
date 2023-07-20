@@ -10,6 +10,7 @@ namespace PRN_ExamO_HE176160.Controllers
         public IActionResult ShowResult(String ExamId)
         {
             ViewBag.ExamId = ExamId;
+            
 
             int? userId = HttpContext.Session.GetInt32("UId");
 

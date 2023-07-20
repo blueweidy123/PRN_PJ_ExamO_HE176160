@@ -43,6 +43,31 @@ namespace PRN_ExamO_HE176160
             );
 
             app.MapControllerRoute(
+                name: "admin",
+                pattern: "/admin",
+                defaults: new { controller = "Dashboard", action = "Admin" }
+            );
+
+            app.MapControllerRoute(
+                name: "accept",
+                pattern: "/accept/{requestId}",
+                defaults: new { controller = "Dashboard", action = "Accept" }
+            );
+
+            app.MapControllerRoute(
+                name: "reject",
+                pattern: "/reject/{requestId}",
+                defaults: new { controller = "Dashboard", action = "Reject" }
+            );
+
+            app.MapControllerRoute(
+                name: "request",
+                pattern: "/admin/request",
+                defaults: new { controller = "Dashboard", action = "Request" }
+            );
+
+
+            app.MapControllerRoute(
                 name: "submitExam",
                 pattern: "/exam/submit",
                 defaults: new { controller = "Exam", action = "SubmitExam" }
@@ -75,9 +100,17 @@ namespace PRN_ExamO_HE176160
 
             app.MapControllerRoute(
                 name: "statistic",
-                pattern: "/statistic",
+                pattern: "/statistic/{range?}",
                 defaults: new { controller = "Statistic", action = "MarkStatistic" }
             );
+
+            app.MapControllerRoute(
+                name: "markRange",
+                pattern: "/markrange/{range}",
+                defaults: new { controller = "Statistic", action = "MarkRange" }
+            );
+
+
 
             app.Run();
         }

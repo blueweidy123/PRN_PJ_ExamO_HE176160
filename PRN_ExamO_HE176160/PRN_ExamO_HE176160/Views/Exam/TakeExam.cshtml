@@ -307,6 +307,7 @@
                             <input type="hidden" name="userAnswers[@question.QuestionId].QuestionId" value="@question.QuestionId" />
                             <input type="hidden" name="userAnswers[@question.QuestionId].ExamId" value="@ViewBag.ExamId" />
                             <input type="hidden" name="userAnswers[@question.QuestionId].UserId" value="@userId" />
+                            @*<input type="hidden" name="userAnswers[@question.QuestionId]." value="@userId" />*@
 
                             <div class="q-text">
                                 <span> @questionIndex. @question.QuestionText</span>
@@ -319,8 +320,8 @@
                                     <div class="option-item">
                                         <input type="radio" id="@option.OptionId" name="userAnswers[@question.QuestionId].SelectedOptionId" hidden onchange="toggleOptionItemClass(this)" value="@option.OptionId" />
 
-
-                                        <label for="@option.OptionId">@option.IsCorrectOption|@option.OptionText</label>
+                                        <label for="@option.OptionId">@option.OptionText</label>
+                                        @*<label for="@option.OptionId">@option.IsCorrectOption|@option.OptionText</label>*@
                                     </div>
                                 }
                             </div>

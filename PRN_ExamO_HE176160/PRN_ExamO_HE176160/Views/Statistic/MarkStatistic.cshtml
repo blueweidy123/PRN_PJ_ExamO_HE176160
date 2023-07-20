@@ -2,178 +2,364 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    string user = Context.Session.GetString("Uname");
+    int? userId = Context.Session.GetInt32("UId");
+
+    string examIdParam = Context.Request.Query["examId"];
 }
 
-<style>
-    .sta-container {
-        width: 90vw;
-        height: 90vh;
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:ital,wght@0,200;0,400;0,500;0,600;0,700;0,800;0,1000;1,400;1,500&family=Oswald:wght@600&family=Roboto:wght@100;400;500;700&display=swap" rel="stylesheet">
 
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);*/
-        background-color: aquamarine;
-        border-radius: 1rem;
-        overflow: hidden;
+
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using PRN_ExamO_HE176160.Models
+@using Microsoft.AspNetCore.Http
+@model List<Result>
+
+<style>
+    * {
+        font-family: 'Bebas Neue', sans-serif;
+        font-family: 'Nunito', sans-serif;
+        font-family: 'Oswald', sans-serif;
+        font-family: 'Roboto', sans-serif;
+        color: #4d4d4d;
+        /*border: 1px solid red !important;*/
+
+        transition: .3s all ease;
     }
 
+    body {
+        background-color: #fbfbfb;
+    }
 
+    .examlst {
+        margin-top: .5rem;
+        overflow-y: scroll !important;
+    }
+
+    .sta-container, .examlst {
+        width: 30vw;
+        height: 40vh;
+        background-color: #ffffff;
+        border-radius: 1rem;
+        overflow: hidden;
+        padding: .5rem 1rem 2rem 1rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
 
         .sta-container table {
             display: flex;
             flex-direction: row;
             width: 100%;
             justify-content: space-between;
-            border-radius:2rem;
-            overflow:hidden;
+            overflow: hidden;
         }
 
-    tr {
-        width: 90vw;
-        
-        position: absolute;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-    }
+        .sta-container tr {
+            /*width: 90vw;*/
+            width: 30vw;
+            /*position: absolute;*/
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+        }
 
-    td {
-        width: calc(90vw / 10);
-        height:90vh;
-        text-align: center;
-        background-color: palevioletred;
-        display:flex;
-        flex-direction:column;
-        justify-content:flex-end;
-    }
+        .sta-container td {
+            width: calc(90vw / 10);
+            height: 40vh;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
 
     .c-1 {
-        background-color: aquamarine;
-        width: calc(90vw / 10);
-        height: calc(90vh / 10 * 1);
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+        height: calc(40vh * @ViewBag.c1 / @ViewBag.total);
     }
 
     .c-2 {
-        background-color: aquamarine;
-        width: calc(90vw / 10);
-        height: calc(90vh / 10 * 2);
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+        height: calc(40vh * @ViewBag.c2 / @ViewBag.total);
     }
 
     .c-3 {
-        background-color: aquamarine;
-        width: calc(90vw / 10);
-        height: calc(90vh / 10 * 3);
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+        height: calc(40vh * @ViewBag.c3 / @ViewBag.total);
     }
 
-    .c-4{
-        background-color: aquamarine;
-        width: calc(90vw / 10);
-        height: calc(90vh / 10 * 4);
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+    .c-4 {
+        height: calc(40vh * @ViewBag.c4 / @ViewBag.total);
     }
-    
+
     .c-5 {
-        background-color: aquamarine;
-        width: calc(90vw / 10);
-        height: calc(90vh / 10 * 5);
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+        height: calc(40vh * @ViewBag.c5 / @ViewBag.total);
     }
 
     .c-6 {
-        background-color: aquamarine;
-        width: calc(90vw / 10);
-        height: calc(90vh / 10 * 6);
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+        height: calc(40vh * @ViewBag.c6 / @ViewBag.total);
     }
 
     .c-7 {
-        background-color: aquamarine;
-        width: calc(90vw / 10);
-        height: calc(90vh / 10 * 7);
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+        height: calc(40vh * @ViewBag.c7 / @ViewBag.total);
     }
 
     .c-8 {
-        background-color: aquamarine;
-        width: calc(90vw / 10);
-        height: calc(90vh / 10 * 8);
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+        height: calc(40vh * @ViewBag.c8 / @ViewBag.total);
     }
 
     .c-9 {
-        background-color: aquamarine;
-        width: calc(90vw / 10);
-        height: calc(90vh / 10 * 9);
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+        height: calc(40vh * @ViewBag.c9 / @ViewBag.total);
     }
 
     .c-10 {
+        height: calc(40vh * @ViewBag.c10 / @ViewBag.total);
+    }
+
+    .topS {
+        transform: translateY(-100%);
+        position: absolute;
+    }
+
+    .col {
+        cursor: pointer;
         background-color: aquamarine;
-        width: calc(90vw / 10);
-        height: calc(90vh / 10 * 10);
+        /*width: calc(100% / 10);*/
+        width: 100%;
+        border-radius: 3px;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
     }
+
+    .u-tb {
+        min-height: 80vh;
+        width: calc(70vw - 5rem);
+        background-color: #ffffff;
+        border-radius: 1rem;
+        overflow: hidden;
+        padding: 1rem 0.5rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+
+        .u-tb table {
+            width: 100%;
+            text-align: left;
+        }
+
+    .outer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .login-user {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        margin: 1rem;
+    }
+
+    .left {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .examlst table {
+        width: 100%;
+    }
+
+    .examlst tr {
+        padding: 0.5rem !important;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+        .examlst tr:hover {
+            background-color: grey;
+        }
+
 </style>
 
-<h1>mark statistic</h1>
+<body>
 
-<section class="sta-container">
-    <table>
-        <tr>
-            <td>
-                <div class="c-@ViewBag.c1"><span>@ViewBag.c1</span></div>
-                <div>0-1</div>
-            </td>
-            <td>
-                <div class="c-@ViewBag.c2"><span>@ViewBag.c2</span></div>
-                <div>1-2</div>
-            </td>
-            <td>
-                <div class="c-@ViewBag.c3"><span>@ViewBag.c3</span></div>
-                <div>2-3</div>
-            </td>
-            <td>
-                <div class="c-@ViewBag.c4"><span>@ViewBag.c4</span></div>
-                <div>3-4</div>
-            </td>
-            <td>
-                <div class="c-@ViewBag.c5"><span>@ViewBag.c5</span></div>
-                <div>4-5</div>
-            </td>
-            <td>
-                <div class ="c-@ViewBag.c6"><span>@ViewBag.c6</span></div>
-                <div>5-6</div>
-            </td>
-            <td>
-                <div class="c-@ViewBag.c7"><span>@ViewBag.c7</span></div>
-                <div>6-7</div>
-            </td>
-            <td>
-                <div class="c-@ViewBag.c8"><span>@ViewBag.c8</span></div>
-                <div>7-8</div>
-            </td>
-            <td>
-                <div class="c-@ViewBag.c9"><span>@ViewBag.c9</span></div>
-                <div>8-9</div>
-            </td>
-            <td>
-                <div class="c-@ViewBag.c10"><span>@ViewBag.c10</span></div>
-                <div>9-10</div>
-            </td>
-        </tr>
-    </table>
-</section>
+    <section class="login-user">
+
+        @if (user != null && !user.Trim().Equals(""))
+        {
+            <span>@user&nbsp </span>
+            <a href="/logout">  Logout</a>
+        }
+
+    </section>
+
+    <div class="outer">
+        <aside class="left">
+            <section class="sta-container">
+                <table>
+                    <tr>
+                        mark distribution | total: @ViewBag.total
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="col c-1" onclick="navigateToSite('1')">
+                                <span class="topS">@ViewBag.c1</span>
+                            </div>
+                            <div>0-1</div>
+                        </td>
+                        <td>
+                            <div class="col c-2" onclick="navigateToSite('2')">
+                                <span class="topS">@ViewBag.c2</span>
+                            </div>
+                            <div>1-2</div>
+                        </td>
+                        <td>
+                            <div class="col c-3" onclick="navigateToSite('3')">
+                                <span class="topS">@ViewBag.c3</span>
+                            </div>
+                            <div>2-3</div>
+                        </td>
+                        <td>
+                            <div class="col c-4" onclick="navigateToSite('4')">
+                                <span class="topS">@ViewBag.c4</span>
+                            </div>
+                            <div>3-4</div>
+                        </td>
+                        <td>
+                            <div class="col c-5" onclick="navigateToSite('5')">
+                                <span class="topS">@ViewBag.c5</span>
+                            </div>
+                            <div>4-5</div>
+                        </td>
+                        <td>
+                            <div class="col c-6" onclick="navigateToSite('6')">
+                                <span class="topS">@ViewBag.c6</span>
+                            </div>
+                            <div>5-6</div>
+                        </td>
+                        <td>
+                            <div class="col c-7" onclick="navigateToSite('7')">
+                                <span class="topS">@ViewBag.c7</span>
+                            </div>
+                            <div>6-7</div>
+                        </td>
+                        <td>
+                            <div class="col c-8" onclick="navigateToSite('8')">
+                                <span class="topS">@ViewBag.c8</span>
+                            </div>
+                            <div>7-8</div>
+                        </td>
+                        <td>
+                            <div class="col c-9" onclick="navigateToSite('9')">
+                                <span class="topS">@ViewBag.c9</span>
+                            </div>
+                            <div>8-9</div>
+                        </td>
+                        <td>
+                            <div class="col c-10" onclick="navigateToSite('10')">
+                                <span class="topS">@ViewBag.c10</span>
+                            </div>
+                            <div>9-10</div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section class="examlst">
+                <form asp-action="MarkStatistic" asp-controller="Statistic" method="get" id="filForm">
+                    <input type="hidden" name="selectedExamId" id="input" />
+
+                <table>
+                    @foreach (Exam e in @ViewBag.exams)
+                    {
+                            <tr id="@e.ExamId" onclick="submitFilter('@e.ExamId')">
+                            <td>
+                                <span>@e.Description</span>
+                            </td>
+                        </tr>
+                    }
+                </table>
+                </form>
+            </section>
+
+        </aside>
+
+        <section class="u-tb">
+            <table>
+                <tr>
+                @ViewBag.fil
+                </tr>
+                <tr>
+                    <th>User</th>
+                    <th>Exam</th>
+                    <th>Mark</th>
+                </tr>
+                @foreach (Result r in Model)
+                {
+                    @if (r.Marks >= (@ViewBag.range - 1) && @r.Marks <= @ViewBag.range && ViewBag.range != 0)
+                    {
+                        @if (@ViewBag.fil != "" && @ViewBag.fil !=null)
+                        {
+                            @if (@ViewBag.fil == r.ExamId)
+                            {
+                                <tr>
+                                    @foreach (User u in @ViewBag.users)
+                                    {
+                                        @if (u.UserId == r.UserId)
+                                        {
+                                            <td>@u.Name</td>
+                                        }
+                                    }
+
+                                    @foreach (Exam e in @ViewBag.exams)
+                                    {
+                                        @if (e.ExamId == r.ExamId)
+                                        {
+                                            <td>@e.Description</td>
+                                        }
+                                    }
+
+                                    <td>@r.Marks</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                @foreach (User u in @ViewBag.users)
+                                {
+                                    @if (u.UserId == r.UserId)
+                                    {
+                                        <td>@u.Name</td>
+                                    }
+                                }
+
+                                @foreach (Exam e in @ViewBag.exams)
+                                {
+                                    @if (e.ExamId == r.ExamId)
+                                    {
+                                        <td>@e.Description</td>
+                                    }
+                                }
+
+                                <td>@r.Marks</td>
+                            </tr>
+                        }
+
+                }
+                }
+            </table>
+        </section>
+    </div>
+
+</body>
+
+<script>
+    function navigateToSite(viewBagValue) {
+        window.location.href = '/statistic/' + encodeURIComponent(viewBagValue)
+    }
+    function submitFilter(examId) {
+        document.getElementById('input').value = examId;
+
+        document.getElementById('filForm').submit();
+    }
+</script>

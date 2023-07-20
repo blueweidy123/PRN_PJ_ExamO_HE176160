@@ -3,13 +3,12 @@ using System.Collections.Generic;
 
 namespace PRN_ExamO_HE176160.Models
 {
-    public partial class Result
+    public partial class Request
     {
-        public int ResultId { get; set; }
+        public int RequestId { get; set; }
         public int? UserId { get; set; }
         public string? ExamId { get; set; }
-        public decimal? Marks { get; set; }
-        public int Attemp { get; set; }
+        public int? Status { get; set; }
 
         public virtual Exam? Exam { get; set; }
         public virtual User? User { get; set; }

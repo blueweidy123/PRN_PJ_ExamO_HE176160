@@ -100,10 +100,6 @@
 </section>
 
 
-
-@*<h1>this is exam result</h1>
-<span>@ViewBag.ExamId : @ViewBag.ExamName</span>*@
-
 <table class="ua-tb">
     <thead>
         <th>
@@ -140,10 +136,7 @@
                         @{
                             var copt = Model.Item2.FirstOrDefault(o => o.QuestionId == ua.QuestionId && o.IsCorrectOption == true);
                         }
-                        @*@foreach (Option opt in Model.Item2)
-                        {
-                            
-                        }*@
+
                         @copt?.OptionText
                     </td>
                 </tr>
@@ -151,79 +144,5 @@
         }
     </tbody>
 </table>
-
-@*<h2>User Answers</h2>
-<table>
-    <thead>
-        <tr>
-            <th>User Answer ID</th>
-            <th>User ID</th>
-            <th>Exam ID</th>
-            <th>Question ID</th>
-            <th>Selected Option ID</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var userAnswer in Model.Item1)
-        {
-            <tr>
-                <td>@userAnswer.UserAnswerId</td>
-                <td>@userAnswer.UserId</td>
-                <td>@userAnswer.ExamId</td>
-                <td>@userAnswer.QuestionId</td>
-                <td>@userAnswer.SelectedOptionId</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<h2>Question List</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Question ID</th>
-            <th>Exam ID</th>
-            <th>Question Text</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var question in Model.Item2)
-        {
-            <tr>
-                <td>@question.QuestionId</td>
-                <td>@question.ExamId</td>
-                <td>@question.QuestionText</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<table>
-    <thead>
-        <tr>
-            <th>User ID</th>
-            <th>Exam ID</th>
-            <th>Question ID</th>
-            <th>Question Text</th>
-            <th>Question isCorrectOption</th>
-            <th>User Answer Option</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var userAnswer in Model.Item1)
-        {
-            var question = Model.Item2.FirstOrDefault(q => q.QuestionId == userAnswer.QuestionId);
-
-            <tr>
-                <td>@userAnswer.UserId</td>
-                <td>@userAnswer.ExamId</td>
-                <td>@userAnswer.QuestionId</td>
-                <td>@question.QuestionText</td>
-                <td>@question.Options.FirstOrDefault(o => o.IsCorrectOption == true)?.OptionText</td>
-                <td>@userAnswer.SelectedOption?.OptionText</td>
-            </tr>
-        }
-    </tbody>
-</table>*@
 
 

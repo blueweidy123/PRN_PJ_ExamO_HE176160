@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using PRN_ExamO_HE176160.Models
+@using Microsoft.AspNetCore.Http
+
+@{
+    string user = Context.Session.GetString("Uname");
+    int? userId = Context.Session.GetInt32("UId");
+}
+
+<h1>admin</h1>
+<table border="1">
+    <tr>
+        <th>User</th>
+        <th>Exam</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    @foreach (Request r in @ViewBag.reqs)
+    {
+        <tr>
+            @foreach (User u in @ViewBag.users)
+            {
+                @if (u.UserId == r.UserId)
+                {
+                    <td>
+                        @u.Name
+                    </td>
+                }
+            }
+            <td>@r.ExamId</td>
+            <td>
+                @if (@r.Status == 0)
+                {
+                    <span>Pending</span>
+                }
+                @if (@r.Status == -1)
+                {
+                    <span>Rejected</span>
+                }
+                @if (@r.Status == 1)
+                {
+                    <span>Accepted</span>
+                }
+            </td>
+            <td>
+                <form method="post" asp-controller="Dashboard" asp-action="Accept" asp-route-requestId="@r.RequestId">
+                    <button type="submit">Accept</button>
+                </form>
+            </td>
+            <td>
+                <form method="post" asp-controller="Dashboard" asp-action="Reject" asp-route-requestId="@r.RequestId">
+                    <button type="submit">Reject</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

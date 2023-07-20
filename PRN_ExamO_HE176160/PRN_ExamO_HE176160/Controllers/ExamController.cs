@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PRN_ExamO_HE176160.Models;
 using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace PRN_ExamO_HE176160.Controllers
 {
@@ -21,11 +22,31 @@ namespace PRN_ExamO_HE176160.Controllers
             }
             using (var context = new OnlineEnExamContext())
             {
+                //var e = context.Exams.FirstOrDefault(e => e.ExamId == ExamId);
+                //var r = context.Results.FirstOrDefault(r => r.ExamId == ExamId && r.UserId == HttpContext.Session.GetInt32("UId"));
+
+                var count = context.Results.Where(c => c.UserId == HttpContext.Session.GetInt32("UId") && c.ExamId == ExamId);
+
+                //int attempLeft = e.Attemp - count.Count();
 
                 bool takenExam = context.Results.Any(r => r.ExamId == ExamId && r.UserId == HttpContext.Session.GetInt32("UId"));
+                bool requesting = context.Requests.Any(re => re.ExamId == ExamId && re.UserId == HttpContext.Session.GetInt32("UId"));
                 if (takenExam)
                 {
-                    return RedirectToAction("PostSubmit", new { ExamId = ExamId });
+                    if (!requesting)
+                    {
+                        return RedirectToAction("PostSubmit", new { ExamId = ExamId });
+                    }
+                    else if(requesting)
+                    {
+                        var request = context.Requests.FirstOrDefault(re => re.ExamId == ExamId && re.UserId == HttpContext.Session.GetInt32("UId"));
+                        //ViewBag.currentReq = request;
+                        if (request.Status != 1)
+                        {
+                            return RedirectToAction("PostSubmit", new { ExamId = ExamId });
+                        }
+                    }
+
                 }
 
                 Debug.WriteLine("Start Exam......");
@@ -34,9 +55,22 @@ namespace PRN_ExamO_HE176160.Controllers
                 ViewBag.ExamName = context.Exams.FirstOrDefault(e => e.ExamId == ExamId).Description;
 
                 List<Question> questions = context.Questions.Where(q => q.ExamId == ExamId).ToList();
+
+                //List<Question> rQuestions = new List<Question>();
+                //while(questions.Count != 0)
+                //{
+                //   int r = RandomNumberGenerator.GetInt32(questions.Count);
+                //    rQuestions.Add(questions[r]);
+                //    questions.Remove(questions[r]);
+                //}
                 List<Option> options = context.Options.Where(o => questions.Select(q => q.QuestionId).Contains(o.QuestionId)).ToList();
 
+                //List<Option> options = context.Options.Where(o => rQuestions.Select(q => q.QuestionId).Contains(o.QuestionId)).ToList();
+
+
+
                 var tupleModel = new Tuple<List<Question>, List<Option>>(questions, options);
+                //var tupleModel = new Tuple<List<Question>, List<Option>>(rQuestions, options);
                 return View(tupleModel);
             }
         }
@@ -47,7 +81,12 @@ namespace PRN_ExamO_HE176160.Controllers
             { 
                 ViewBag.ExamId = ExamId;
                 ViewBag.ExamName = context.Exams.FirstOrDefault(e => e.ExamId == ExamId).Description;
-
+                var requesting = context.Requests.FirstOrDefault(r => r.ExamId == ExamId && r.UserId == HttpContext.Session.GetInt32("UId"));
+                var req = requesting?.Status;
+                if (req!=null)
+                {
+                    ViewBag.Req = req;
+                }
                 return View();
             }
         }
@@ -73,6 +112,11 @@ namespace PRN_ExamO_HE176160.Controllers
 
                 Debug.WriteLine("total correect:" + correctOptionCount);
 
+                int attemp = context.Results.Where(r => r.UserId == userAnswers[0].UserId && r.ExamId == userAnswers[0].ExamId)
+                    .OrderByDescending(r => r.Attemp)
+                    .FirstOrDefault().Attemp;
+
+
                 foreach (UserAnswer userAnswer in userAnswers)
                 {
                     Option selectedOption = context.Options.Find(userAnswer.SelectedOptionId);
@@ -95,8 +139,11 @@ namespace PRN_ExamO_HE176160.Controllers
                 {
                     UserId = userAnswers[0].UserId,
                     ExamId = userAnswers[0].ExamId,
-                    Marks = (totalRightAnswer/correctOptionCount)*10
+                    Marks = (totalRightAnswer/correctOptionCount)*10,
+                    Attemp = (attemp+1)
                 });
+                var request = context.Requests.FirstOrDefault(re => re.ExamId == userAnswers[0].ExamId && re.UserId == HttpContext.Session.GetInt32("UId"));
+                context.Remove(request);
                 context.SaveChanges();
             }
 

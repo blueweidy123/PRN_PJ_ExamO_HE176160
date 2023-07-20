@@ -74,6 +74,10 @@
         font-size:1.4rem;
     }
 
+    #reqBtn{
+        position:absolute;
+        left:50%;
+    }
 </style>
 
 <section class="login-user">
@@ -89,4 +93,18 @@
 </section>
 <section class="msg">
     <p>Congratulation!!! You have already finished this Exam. <a href="/exam/result/@ViewBag.ExamId">View your answer</a></p>
+    
+        <form asp-action="Request" asp-controller="Dashboard" method="post"> 
+
+            <input type="hidden" name="uId" value="@userId" />
+            <input type="hidden" name="eId" value="@ViewBag.ExamId" />
+            <button id="reqBtn" type="submit">request</button>
+        </form>
+
+    @if (@ViewBag.Req != null)
+    {
+        <br />
+        <br />
+        <p>@ViewBag.Req</p>
+    }
 </section>

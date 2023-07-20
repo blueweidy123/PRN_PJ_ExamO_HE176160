@@ -19,6 +19,7 @@ namespace PRN_ExamO_HE176160.Models
         public virtual DbSet<Exam> Exams { get; set; } = null!;
         public virtual DbSet<Option> Options { get; set; } = null!;
         public virtual DbSet<Question> Questions { get; set; } = null!;
+        public virtual DbSet<Request> Requests { get; set; } = null!;
         public virtual DbSet<Result> Results { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<UserAnswer> UserAnswers { get; set; } = null!;
@@ -26,8 +27,8 @@ namespace PRN_ExamO_HE176160.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder()
-                              .SetBasePath(Directory.GetCurrentDirectory())
-                              .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                                          .SetBasePath(Directory.GetCurrentDirectory())
+                                          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             IConfigurationRoot configuration = builder.Build();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyCnn"));
 
@@ -96,6 +97,26 @@ namespace PRN_ExamO_HE176160.Models
                     .HasConstraintName("FK__Questions__ExamI__286302EC");
             });
 
+            modelBuilder.Entity<Request>(entity =>
+            {
+                entity.Property(e => e.ExamId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ExamID");
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.HasOne(d => d.Exam)
+                    .WithMany(p => p.Requests)
+                    .HasForeignKey(d => d.ExamId)
+                    .HasConstraintName("FK__Requests__ExamID__628FA481");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Requests)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK__Requests__Status__619B8048");
+            });
+
             modelBuilder.Entity<Result>(entity =>
             {
                 entity.Property(e => e.ResultId).HasColumnName("ResultID");
@@ -104,6 +125,8 @@ namespace PRN_ExamO_HE176160.Models
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("ExamID");
+
+                entity.Property(e => e.Marks).HasColumnType("decimal(10, 2)");
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
