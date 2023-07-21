@@ -94,17 +94,34 @@
 <section class="msg">
     <p>Congratulation!!! You have already finished this Exam. <a href="/exam/result/@ViewBag.ExamId">View your answer</a></p>
     
-        <form asp-action="Request" asp-controller="Dashboard" method="post"> 
+    @*<form asp-action="Request" asp-controller="Dashboard" method="post">
 
-            <input type="hidden" name="uId" value="@userId" />
-            <input type="hidden" name="eId" value="@ViewBag.ExamId" />
-            <button id="reqBtn" type="submit">request</button>
-        </form>
+        <input type="hidden" name="uId" value="@userId" />
+        <input type="hidden" name="eId" value="@ViewBag.ExamId" />
+        <button id="reqBtn" type="submit">request</button>
+    </form>*@
 
     @if (@ViewBag.Req != null)
     {
         <br />
         <br />
-        <p>@ViewBag.Req</p>
+        @if (@ViewBag.Req == 0)
+        {
+            <p>Requesting</p>
+        }
+        @if (@ViewBag.Req == -1)
+        {
+            <p>Rejected</p>
+        }
+
+    }
+    else
+    {
+        <form asp-action="Request" asp-controller="Dashboard" method="post">
+
+            <input type="hidden" name="uId" value="@userId" />
+            <input type="hidden" name="eId" value="@ViewBag.ExamId" />
+            <button id="reqBtn" type="submit">request</button>
+        </form>
     }
 </section>

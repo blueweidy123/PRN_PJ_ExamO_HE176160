@@ -112,52 +112,57 @@
 <table class="ua-tb">
     @foreach (Result r in @ViewBag.results)
     {
-        <thead>
-            <tr class="row--head">
-                <th colspan="4">
-                    <h2>Attemp: @r.Attemp |Mark: @r.Marks</h2>
-                </th>
-            </tr>
-
-            <tr>
-                <th>
-                    Question
-                </th>
-                <th>
-                    User Answer
-                </th>
-
-                <th>
-                    Correct Answer
-                </th>
-
-            </tr>
-        </thead>
-        <tbody>
-        @foreach (UserAnswer ua in Model.Item1)
+        if (r.ExamId == @ViewBag.ExamId)
         {
 
-            @if (userId == ua.UserId && @ViewBag.ExamId == ua.ExamId && ua.Attemp == r.Attemp)
-            {
-                <tr style="@(ua.SelectedOption?.IsCorrectOption == true ? "" : "background-color:rgba(219, 112, 147, 0.5);")">
 
-                    <td>
-                        @ua.Question.QuestionText
-                    </td>
-                    <td>
-                        @ua.SelectedOption.OptionText
-                    </td>
-                    <td>
-                        @{
-                            var copt = Model.Item2.FirstOrDefault(o => o.QuestionId == ua.QuestionId && o.IsCorrectOption == true);
-                        }
-
-                        @copt?.OptionText
-                    </td>
+            <thead>
+                <tr class="row--head">
+                    <th colspan="4">
+                        <h2>Attemp: @r.Attemp |Mark: @r.Marks</h2>
+                    </th>
                 </tr>
-            }
+
+                <tr>
+                    <th>
+                        Question
+                    </th>
+                    <th>
+                        User Answer
+                    </th>
+
+                    <th>
+                        Correct Answer
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (UserAnswer ua in Model.Item1)
+                {
+
+                    @if (userId == ua.UserId && @ViewBag.ExamId == ua.ExamId && ua.Attemp == r.Attemp)
+                    {
+                        <tr style="@(ua.SelectedOption?.IsCorrectOption == true ? "" : "background-color:rgba(219, 112, 147, 0.5);")">
+
+                            <td>
+                                @ua.Question.QuestionText
+                            </td>
+                            <td>
+                                @ua.SelectedOption.OptionText
+                            </td>
+                            <td>
+                                @{
+                                    var copt = Model.Item2.FirstOrDefault(o => o.QuestionId == ua.QuestionId && o.IsCorrectOption == true);
+                                }
+
+                                @copt?.OptionText
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
         }
-        </tbody>
     }
 
 </table>
