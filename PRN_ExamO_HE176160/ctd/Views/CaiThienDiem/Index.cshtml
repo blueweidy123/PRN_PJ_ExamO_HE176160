@@ -1,0 +1,49 @@
+﻿
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+}
+
+<style>
+    .carousel{
+        width:100svw;
+        height:100svh;
+
+    }
+
+        .carousel img {
+        height:100%;
+        width:100%
+    }
+
+        .carousel button {
+        position:absolute;
+        top:50%;
+        font-size:1.2rem;
+        padding:0.4rem 1rem;
+    }
+    .p{
+        right:1rem;
+    }
+    .n{
+        left:1rem;
+    }
+
+</style>
+
+@model List<string>  
+<div class="carousel">
+    <form asp-action="Index" asp-controller="CaiThienDiem" id="carousel">
+        <button class="p" type="submit" name="btn" value="pre">Pre</button>
+        <button class="n" type="submit" name="btn" value="next">Next</button>
+        <input type="hidden" name="currentIndex" value="@ViewBag.CurrentIndex" />
+
+        <img id="carouselImage" class="carousel-image" src="@Model[ViewBag.CurrentIndex]" />
+    </form>
+</div>
+
+
